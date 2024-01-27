@@ -22,6 +22,7 @@ public class WhackAChicken : MonoBehaviour
                 whackSpot.transform.position = new Vector3(i, .5f, j);
                 Material mat = whackSpot.GetComponent<MeshRenderer>().material;
                 mat.color = Color.magenta;
+                whackSpots[i+1,j+1] = whackSpot;
             }
 
         }
@@ -72,8 +73,7 @@ public class WhackAChicken : MonoBehaviour
             if (currentTimeStep > rng + lastTimestep)
             {
                 Debug.Log("Despawned a chicken at:" + currentTimeStep);
-                GameObject chicken = whackSpots[activeChicken.x, activeChicken.y];
-                chicken.GetComponent<BoxCollider>().enabled = false;
+                whackSpots[activeChicken.x, activeChicken.y].GetComponent<BoxCollider>().enabled = false;
                 lastTimestep = currentTimeStep;
                 chickenActive = false;
             }
