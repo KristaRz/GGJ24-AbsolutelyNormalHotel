@@ -7,8 +7,12 @@ using UnityEngine;
 public class ElevatorManager : MonoBehaviour
 {
 
+    public static ElevatorManager Instance { get; private set; }
+
     void Awake()
     {
+        Instance = this;
+        
         LeftDoorOpen = LeftDoor.transform;
         RightDoorOpen = RightDoor.transform;
 
