@@ -10,10 +10,10 @@ public class Inv_Collectable : MonoBehaviour
 
     private Color _uncollectedColor;
 
-    public void SetCollected(Pickupable pickupable)
+    public void SetCollected(GameObject pickupable)
     {
         _uncollectedColor = _IconImage.color;
-        _IconImage.sprite = pickupable.Icon;
+        //_IconImage.sprite = pickupable.Icon;
 
         _IconImage.color = Color.white;
     }

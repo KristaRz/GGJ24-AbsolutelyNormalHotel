@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Inv_DropCollected : MonoBehaviour
 {
-    [SerializeField] private Pickupable _thisPickupable;
+    //[SerializeField] private Pickupable _thisPickupable;
     private bool _isInZone = false;
 
     public void SetInZone(bool state)
@@ -20,7 +20,7 @@ public class Inv_DropCollected : MonoBehaviour
         if (_isInZone)
         {
             pickupableObject.SetActive(false);
-            _thisPickupable.PickThisUp();
+            //_thisPickupable.PickThisUp();
         }
     }
 

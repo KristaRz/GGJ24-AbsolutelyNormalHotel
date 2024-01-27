@@ -9,6 +9,7 @@ TagManager:
   - LeftHand
   - Posessable
   - TeleportPoint
+  - Finger
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - 
   - 
   - Hand
-  - 
+  - IgnoreHand
   - 
   - 
   - 
