@@ -106,6 +106,7 @@ public class ChickenGame : MonoBehaviour
             Vector3 newDirection = Vector3.Reflect(transform.forward, hitNormal);
 
             // Reset angular velocity to prevent the chicken from tilting or rolling
+            if(rb!=null)
             rb.angularVelocity = Vector3.zero;
 
             // Calculate the new Y rotation while keeping X and Z rotations as zero
