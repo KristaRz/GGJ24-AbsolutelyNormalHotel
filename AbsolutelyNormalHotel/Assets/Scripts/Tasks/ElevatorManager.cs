@@ -1,16 +1,41 @@
 
 
 using System.Collections;
+
 using UnityEngine;
 
 public class ElevatorManager : MonoBehaviour
 {
-    
-    public void SelectFloor(int floor)
+
+    void Awake()
     {
+        LeftDoorOpen = LeftDoor.transform;
+        RightDoorOpen = RightDoor.transform;
+
+        _buttons = GetComponentsInChildren<FloorButton>();
+    }
+
+
+    #region Floors
+
+    private FloorButton[] _buttons;
+
+    private int _selectedFloor = 0;
+
+    public void SelectFloor(FloorButton floor)
+    {
+        _selectedFloor = floor.Index;
+        foreach(FloorButton floorButton in _buttons)
+        {
+            if (floorButton != floor)
+                floorButton.SelectFloor(false);
+        }
         // coroutine for a few seconds until it starts (and door close?)
     }
 
+
+
+    #endregion
 
     #region Doors
 
@@ -25,12 +50,6 @@ public class ElevatorManager : MonoBehaviour
     [SerializeField] private float SlideTime = 1;
     [SerializeField] private float SlideDelay = 0;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        LeftDoorOpen = LeftDoor.transform;
-        RightDoorOpen = RightDoor.transform;
-    }
 
     private float startTime;
     private Coroutine _doorSlideRoutine;
