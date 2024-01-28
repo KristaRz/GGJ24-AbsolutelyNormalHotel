@@ -11,6 +11,7 @@ TagManager:
   - TeleportPoint
   - Ground
   - Chicken
+  - Finger
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - 
   - 
   - Grabbable
-  - 
+  - Chicken
   - 
   - 
   - Hand
@@ -44,7 +45,6 @@ TagManager:
   - 
   - 
   - 
-  - Teleport
   m_SortingLayers:
   - name: Default
     uniqueID: 0

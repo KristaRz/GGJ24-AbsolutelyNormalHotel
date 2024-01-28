@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8363313420591214519}
   - component: {fileID: 4135249566650859343}
   - component: {fileID: 4836339397995195714}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ChickenGame
   m_TagString: Chicken
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 7054165901072661520}
   - {fileID: 8112214067826521660}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3098161613314753950
 MonoBehaviour:

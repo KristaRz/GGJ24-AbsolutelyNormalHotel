@@ -3,6 +3,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class GameManager : MonoBehaviour
 {
     #region Singleton
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public enum WeaponType { None, Shuriken, Katana }
+
     public int ChickenScore = 0;
     public int CurrentLevel = 1;
     public int LevelLength = 0;
@@ -32,6 +35,23 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent<int> OnLevelStart;
     public UnityEvent<int> OnFinishLevelWithScore;
+
+    private bool _weaponSet = false;
+    public WeaponType WeaponCurrent;
+    public void SetWeapon(WeaponType weaponType)
+    {
+        WeaponCurrent = weaponType;
+        _weaponSet = true;
+        FindObjectOfType<WeaponHandler>().SetWeapon(weaponType);
+    }
+
+    public WeaponType GetWeapon()
+    {
+        if (!_weaponSet)
+            return WeaponType.None;
+        else
+            return WeaponCurrent;
+    }
 
     public void SetLevel(int levelIndex)
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Shuriken : MonoBehaviour
+public class Shruiken : MonoBehaviour
 {
     private Rigidbody rigidBody;
     private bool isHeld = false;
