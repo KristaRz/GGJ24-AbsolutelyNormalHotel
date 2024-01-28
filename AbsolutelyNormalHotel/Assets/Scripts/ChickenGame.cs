@@ -131,6 +131,7 @@ public class ChickenGame : MonoBehaviour
     {
         if (!prefab.activeSelf )
             prefab.SetActive(true);
+
     }
 
     void OnDrawGizmos()
