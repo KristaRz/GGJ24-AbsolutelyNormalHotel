@@ -9,7 +9,8 @@ TagManager:
   - LeftHand
   - Posessable
   - TeleportPoint
-  - Finger
+  - Ground
+  - Chicken
   layers:
   - Default
   - TransparentFX

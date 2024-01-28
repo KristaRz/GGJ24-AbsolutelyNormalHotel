@@ -8,14 +8,16 @@ public class Egg : MonoBehaviour
 {
     [SerializeField] private GameObject chickenPrefab;
     [SerializeField] private GameObject eggyolkPrefab;
+    
     private float _spawnTimer = 10f;
     private float _time;
+    
     private void Update()
     {
         
-        _spawnTimer += Time.deltaTime;
+        _time += Time.deltaTime;
         
-        if ( _spawnTimer <_time)
+        if ( _spawnTimer < _time)
         {
             SpawnChicken();
 
@@ -27,20 +29,19 @@ public class Egg : MonoBehaviour
         {
             SpawnEggyolk();
         }
-
     }
 
     private void SpawnEggyolk()
     {
         //play sound of egg crushing maybe??
         Instantiate(eggyolkPrefab, gameObject.transform.position, quaternion.identity);
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     private void SpawnChicken()
     {
         Instantiate(chickenPrefab, gameObject.transform.position, quaternion.identity);
-        Destroy(this);
+        Destroy(gameObject);
     }
     
 }

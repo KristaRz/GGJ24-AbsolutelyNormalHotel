@@ -22,6 +22,12 @@ public class TimerHandler : MonoBehaviour
 
     private void StartTimer(int levelTime)
     {
+        if(levelTime == 0)
+        {
+            TimeLeftDisplay.SetText("");
+            return;
+        }
+
         countTimeActive = true;
         _levelTime = levelTime;
         startTime = Time.time;
@@ -38,7 +44,6 @@ public class TimerHandler : MonoBehaviour
             _timePassed = Time.time - startTime;
 
             TimeLeftDisplay.SetText((_levelTime - (int)_timePassed).ToString());
-            Debug.Log(_timePassed.ToString());
             if (_levelTime - _timePassed <= 0)
             {
                 GameManager.Instance.FinishLevel();             
