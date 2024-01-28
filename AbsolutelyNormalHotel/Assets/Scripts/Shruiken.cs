@@ -13,6 +13,7 @@ public class Shuriken : MonoBehaviour
     private Vector3 angularVelocity;
 
     public UnityEvent OnHit;
+    Vector3 triggerPosition;
 
 
     private void Awake()
@@ -34,7 +35,7 @@ public class Shuriken : MonoBehaviour
     {
         isHeld = false;
         rigidBody.useGravity = false;
-        rigidBody.velocity = velocity;
+        rigidBody.velocity = velocity*2;
 
 
         rigidBody.angularVelocity = Vector3.zero;
@@ -47,17 +48,35 @@ public class Shuriken : MonoBehaviour
         {
             // Calculate velocity and angular velocity
             velocity = (transform.position - lastPosition) / Time.deltaTime;
-            angularVelocity = (transform.rotation.eulerAngles - lastRotation.eulerAngles) / Time.deltaTime;
+            //angularVelocity = (transform.rotation.eulerAngles - lastRotation.eulerAngles) / Time.deltaTime;
 
             // Update last position and rotation for the next frame
             lastPosition = transform.position;
             lastRotation = transform.rotation;
+        }else
+        {
+                        angularVelocity = Vector3.zero;
+
         }
 
     }
 
+    public void InstantiatePrefab(GameObject prefab)
+    {
+
+        Instantiate(prefab, triggerPosition, Quaternion.identity);
+    }
+    public void DestroySelf()
+    {
+
+        Destroy(gameObject);
+    }
     private void OnTriggerEnter(Collider other)
     {
+        // Approximate the hit point as the closest point on the bounds of the collider
+        triggerPosition = other.ClosestPoint(transform.position);
+
+
         if (other.CompareTag("Chicken"))
         {
             OnHit.Invoke();

@@ -15,7 +15,7 @@ public class EggSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _spawnTimer = Random.Range(3, 7);
+        _spawnTimer = Random.Range(7, 10);
     }
 
     private void Update()

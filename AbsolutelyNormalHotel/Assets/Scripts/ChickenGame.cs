@@ -111,8 +111,9 @@ public class ChickenGame : MonoBehaviour
             // Set the new rotation
             transform.rotation = Quaternion.LookRotation(newDirection);
 
-            OnCollision.Invoke();
         }
+
+        OnCollision.Invoke();
     }
 
     public void InstantiatePrefab(GameObject prefab)
@@ -125,6 +126,12 @@ public class ChickenGame : MonoBehaviour
     {
         OnDeath.Invoke();
         Destroy(gameObject);
+    }
+
+    public void ActivateIfDeactive(GameObject prefab)
+    {
+        if (!prefab.activeSelf)
+            prefab.SetActive(true);
     }
 
     void OnDrawGizmos()
