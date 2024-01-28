@@ -2250,7 +2250,7 @@ MonoBehaviour:
   ChickenScore: 0
   CurrentLevel: 1
   LevelLength: 0
-  Level1Time: 120
+  Level1Time: 60
   Level2Time: 120
   Level3Time: 120
   OnLevelStart:
@@ -4972,6 +4972,10 @@ PrefabInstance:
     - target: {fileID: 1948898084528996584, guid: 24feaaaac849322458f28912250c49f6, type: 3}
       propertyPath: m_Name
       value: vintage_suitcase_01_bottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948898084528996584, guid: 24feaaaac849322458f28912250c49f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6532889597204039372, guid: 24feaaaac849322458f28912250c49f6, type: 3}
       propertyPath: m_RootOrder
@@ -23170,7 +23174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088487494}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -8.785, y: 0.076, z: -1.009}
+  m_LocalPosition: {x: -8.785, y: 0.076, z: -0.73}
   m_LocalScale: {x: 0.07083201, y: 0.070832044, z: 0.070832044}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -23783,7 +23787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4396488834919046955}
   m_LocalRotation: {x: -0.42287305, y: -0.24860585, z: 0.5832787, w: 0.64742535}
-  m_LocalPosition: {x: -9.01, y: 0.172, z: -1.608}
+  m_LocalPosition: {x: -8.962, y: 0.157, z: -1.638}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
