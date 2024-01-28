@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class Shuriken : MonoBehaviour
@@ -11,6 +11,9 @@ public class Shuriken : MonoBehaviour
     private Quaternion lastRotation;
     private Vector3 velocity;
     private Vector3 angularVelocity;
+
+    public UnityEvent OnHit;
+
 
     private void Awake()
     {
@@ -57,6 +60,7 @@ public class Shuriken : MonoBehaviour
     {
         if (other.CompareTag("Chicken"))
         {
+            OnHit.Invoke();
             // Destroy chicken
             other.gameObject.GetComponent<ChickenGame>().DestroySelf();
         }
