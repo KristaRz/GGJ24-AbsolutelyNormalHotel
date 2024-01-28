@@ -38,7 +38,7 @@ public class Receptionist : MonoBehaviour
         _voiceIndex++;
         yield return new WaitForSeconds(audioClip.length);
 
-        if(_voiceIndex <= voiceLines.Count) PlayNextVoiceLine();
+        //if(_voiceIndex <= voiceLines.Count) PlayNextVoiceLine();
     }
 
     private void OnDisable()
