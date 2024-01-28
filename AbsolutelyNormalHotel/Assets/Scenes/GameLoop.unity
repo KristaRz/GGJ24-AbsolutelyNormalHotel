@@ -1976,7 +1976,7 @@ MonoBehaviour:
   ChickenScore: 0
   CurrentLevel: 1
   LevelLength: 0
-  Level1Time: 10
+  Level1Time: 120
   Level2Time: 120
   Level3Time: 120
   OnLevelStart:
