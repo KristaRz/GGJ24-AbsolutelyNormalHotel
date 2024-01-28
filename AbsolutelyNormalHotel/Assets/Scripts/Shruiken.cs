@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,32 +5,42 @@ public class Shuriken : MonoBehaviour
 {
     private Rigidbody rigidBody;
     private bool isHeld = false;
+    private bool isFreeFalling = false; // Flag to indicate if the shuriken is in free fall
     private Vector3 lastPosition;
-    private Vector3 positionBeforeRelease; // Store position just before release
+    private Vector3 positionBeforeRelease;
     private Quaternion lastRotation;
     private Vector3 velocity;
     private Vector3 angularVelocity;
+    public Animator anim;
 
     public UnityEvent OnHit;
-    Vector3 triggerPosition;
+    private Vector3 triggerPosition;
+
+    // Variables for easing the descent
+    private float maxDescentSpeed = 9.81f; // Maximum descent speed
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    // Call this method when the shuriken starts being held
+    // Called when the shuriken starts being held
     public void Grab()
     {
         isHeld = true;
+        isFreeFalling = false; // Stop free falling when grabbed
         lastPosition = transform.position;
         lastRotation = transform.rotation;
     }
 
-    // Call this method when the shuriken is released
+    // Called when the shuriken is released
     public void Release()
     {
+        anim.ResetTrigger("Idle");
+
+        anim.SetTrigger("Roll");
         isHeld = false;
+        isFreeFalling = true; // Start free falling when released
 
         // Calculate the direction of movement at the moment of release
         Vector3 releaseDirection = (transform.position - positionBeforeRelease).normalized;
@@ -40,11 +49,9 @@ public class Shuriken : MonoBehaviour
         // Set the velocity to continue in the release direction
         rigidBody.velocity = releaseDirection * velocity.magnitude * 2; // Adjust the multiplier as needed
 
-        // Add a downward force to simulate gravity
-        rigidBody.velocity = new Vector3(rigidBody.velocity.x, -9.81f, rigidBody.velocity.z);
-
-        rigidBody.angularVelocity = Vector3.zero;
+        rigidBody.angularVelocity = angularVelocity;
         gameObject.transform.rotation = lastRotation;
+
     }
 
     private void Update()
@@ -52,6 +59,7 @@ public class Shuriken : MonoBehaviour
         if (isHeld)
         {
             velocity = (transform.position - lastPosition) / Time.deltaTime;
+            angularVelocity = rigidBody.angularVelocity;
 
             // Update last position and rotation for the next frame
             lastPosition = transform.position;
@@ -60,10 +68,26 @@ public class Shuriken : MonoBehaviour
             // Update positionBeforeRelease
             positionBeforeRelease = lastPosition;
         }
-        else
+        else if (isFreeFalling)
         {
-            angularVelocity = Vector3.zero;
+
+
+            EaseDescent(); // Apply ease descent while in free fall
         }
+
+
+    }
+    private void EaseDescent()
+    {
+        float easeFactor = CalculateEaseFactor(rigidBody.velocity.y, maxDescentSpeed);
+        Vector3 newVelocity = rigidBody.velocity;
+        newVelocity.y *= easeFactor;
+        rigidBody.velocity = newVelocity;
+    }
+
+    private float CalculateEaseFactor(float currentSpeed, float maxSpeed)
+    {
+        return 1 - Mathf.Clamp01(Mathf.Abs(currentSpeed) / maxSpeed);
     }
 
     public void InstantiatePrefab(GameObject prefab)
@@ -79,7 +103,6 @@ public class Shuriken : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         triggerPosition = other.ClosestPoint(transform.position);
-
         if (other.CompareTag("Chicken"))
         {
             OnHit.Invoke();
@@ -87,8 +110,21 @@ public class Shuriken : MonoBehaviour
         }
         if (!other.CompareTag("Hand") && other.name != "Direct Interactor")
         {
-            // Simulate gravity effect when hitting non-hand objects
-            rigidBody.velocity = new Vector3(rigidBody.velocity.x, -9.81f, rigidBody.velocity.z);
+
+
+            // Instead of setting a strong gravity effect, halt the shuriken more gently
+            //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0, rigidBody.velocity.z);
+
+
+            rigidBody.angularVelocity = Vector3.zero; // Optionally, stop angular velocity as well
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        anim.ResetTrigger("Roll");
+
+        anim.SetTrigger("Idle"); // Stop the rolling animation upon collision
+        isFreeFalling = false; // Also stop free falling
+    }
+
 }
