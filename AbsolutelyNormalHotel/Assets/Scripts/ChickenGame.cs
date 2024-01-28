@@ -124,6 +124,7 @@ public class ChickenGame : MonoBehaviour
 
     public void DestroySelf()
     {
+        LevelHandler.Instance.CountChickenKill();
         OnDeath.Invoke();
         Destroy(gameObject);
     }

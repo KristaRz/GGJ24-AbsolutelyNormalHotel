@@ -1,4 +1,5 @@
 
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,17 +33,6 @@ public class GameManager : MonoBehaviour
     public UnityEvent<int> OnLevelStart;
     public UnityEvent<int> OnFinishLevelWithScore;
 
-    public bool startLevel = false;
-
-    private void Update()
-    {
-        if (startLevel)
-        {
-            SetLevel(CurrentLevel);
-            LevelStart();
-        }
-    }
-
     public void SetLevel(int levelIndex)
     {
         CurrentLevel = levelIndex;
@@ -57,6 +47,7 @@ public class GameManager : MonoBehaviour
             case 3: 
                 LevelLength = Level3Time; 
                 break;
+            case 0: LevelLength = 0; break;
         }
     }
 
@@ -65,18 +56,28 @@ public class GameManager : MonoBehaviour
         OnLevelStart.Invoke(LevelLength);
     }
     
+    public void LevelStart(int delayTime)
+    {
+        Invoke("LevelStart", delayTime);
+    }
+    
     public void FinishLevel()
     {
+        ViewFader viewFader = FindObjectOfType<ViewFader>();
+        viewFader.OnScreenOff.AddListener(CalculateScore);
+        viewFader.BlinkScreen();
         CalculateScore();
     }
 
     private void CalculateScore()
     {
-        Receptionist[] allChickens = FindObjectsOfType<Receptionist>(); // change this to chickens obviously
+        ChickenGame[] allChickens = FindObjectsOfType<ChickenGame>();
+        ChickenScore = LevelHandler.Instance.GetFinalChickenKillCount();
 
         float score = ChickenScore/ allChickens.Length * 100;
         int levelScore = (int)score;
 
+        FindObjectOfType<TeleportPlayer>().TeleportTo(GameObject.Find("ElevatorPlayerTarget").transform);
         OnFinishLevelWithScore.Invoke(levelScore);
     }
 }

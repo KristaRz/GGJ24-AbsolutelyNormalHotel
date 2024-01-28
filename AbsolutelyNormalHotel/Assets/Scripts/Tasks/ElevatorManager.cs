@@ -23,6 +23,10 @@ public class ElevatorManager : MonoBehaviour
             SlideDoorInstant(false);
     }
 
+    public void StartThisFloor()
+    {
+        GameManager.Instance.LevelStart((int)SlideDelay);
+    }
 
     #region Floors
 
@@ -34,6 +38,8 @@ public class ElevatorManager : MonoBehaviour
     public void SelectFloor(FloorButton floor)
     {
         _selectedFloor = floor.Index;
+        GameManager.Instance.SetLevel(_selectedFloor);
+
         foreach(FloorButton floorButton in _buttons)
         {
             if (floorButton != floor)
@@ -84,7 +90,6 @@ public class ElevatorManager : MonoBehaviour
             return;
 
         startTime = Time.time;
-        Debug.Log("Slide door to " + state);
         if (state)
         {
             _doorSlideRoutine = StartCoroutine(SlideDoor(LeftDoorOpen, RightDoorOpen, SlideDelay));
@@ -108,7 +113,6 @@ public class ElevatorManager : MonoBehaviour
 
     private IEnumerator SlideDoor(Vector3 leftTarget, Vector3 rightTarget, float delay)
     {
-        Debug.Log("Coroutine door to starts.");
         yield return new WaitForSeconds(delay);
 
         _leftStart = LeftDoor.transform.position;
@@ -134,7 +138,6 @@ public class ElevatorManager : MonoBehaviour
             RightDoor.transform.position = Vector3.Lerp(_rightStart, rightTarget, rFractionOfJourney);
             yield return null;
         }
-        Debug.Log("Coroutine door to ends.");
         LeftDoor.transform.position = leftTarget;
         RightDoor.transform.position = rightTarget;
 
