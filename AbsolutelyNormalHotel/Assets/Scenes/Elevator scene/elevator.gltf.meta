@@ -54,58 +54,9 @@ ScriptedImporter:
   - type: 1
     originalUri: Assets\Scenes\Elevator scene\Panel_metallic.jpg
     assetPath: Assets\Scenes\Elevator scene\Panel_metallic.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\Chandelier_01_nor_gl_2k.png
-    assetPath: Assets\Scenes\Elevator scene\Chandelier_01_nor_gl_2k.png
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\Chandelier_01_diff_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\Chandelier_01_diff_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\Chandelier_01_metallic_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\Chandelier_01_metallic_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_arm_chair_01_legs_nor_gl_2k.png
-    assetPath: Assets\Scenes\Elevator scene\modern_arm_chair_01_legs_nor_gl_2k.png
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_arm_chair_01_legs_diff_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\modern_arm_chair_01_legs_diff_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_arm_chair_01_legs_metal_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\modern_arm_chair_01_legs_metal_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_arm_chair_01_pillow_nor_gl_2k.png
-    assetPath: Assets\Scenes\Elevator scene\modern_arm_chair_01_pillow_nor_gl_2k.png
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_arm_chair_01_pillow_diff_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\modern_arm_chair_01_pillow_diff_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_arm_chair_01_pillow_metal_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\modern_arm_chair_01_pillow_metal_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_wooden_cabinet_nor_gl_4k.png
-    assetPath: Assets\Scenes\Elevator scene\modern_wooden_cabinet_nor_gl_4k.png
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_wooden_cabinet_diff_4k.jpg
-    assetPath: Assets\Scenes\Elevator scene\modern_wooden_cabinet_diff_4k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\modern_wooden_cabinet_rough_4k.jpg
-    assetPath: Assets\Scenes\Elevator scene\modern_wooden_cabinet_rough_4k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\throw_pillows_01_nor_gl_2k.png
-    assetPath: Assets\Scenes\Elevator scene\throw_pillows_01_nor_gl_2k.png
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\throw_pillows_01_diff_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\throw_pillows_01_diff_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\throw_pillows_01_rough_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\throw_pillows_01_rough_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\WoodenTable_02_nor_gl_2k.png
-    assetPath: Assets\Scenes\Elevator scene\WoodenTable_02_nor_gl_2k.png
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\WoodenTable_02_diff_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\WoodenTable_02_diff_2k.jpg
-  - type: 1
-    originalUri: Assets\Scenes\Elevator scene\WoodenTable_02_metallic_2k.jpg
-    assetPath: Assets\Scenes\Elevator scene\WoodenTable_02_metallic_2k.jpg
-  reportItems: []
+  reportItems:
+  - type: 0
+    code: 43
+    messages:
+    - Couldn't load texture at Assets\Scenes\Elevator scene\Box_normal.png
+    - 0
