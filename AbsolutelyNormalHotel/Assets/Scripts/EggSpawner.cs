@@ -11,25 +11,26 @@ public class EggSpawner : MonoBehaviour
     [SerializeField] private GameObject eggPrefab;
     private float _spawnTimer;
     private float _time;
-    private bool eggSpawned;
+    
 
     private void Awake()
     {
-        _spawnTimer = Random.Range(7, 15);
-        eggSpawned = false;
+        _spawnTimer = Random.Range(3, 7);
     }
 
     private void Update()
     {
         
-        _spawnTimer += Time.deltaTime;
+        _time += Time.deltaTime;
         
-        if (!eggSpawned && _spawnTimer<_time)
+        if ( _spawnTimer < _time)
         {
             //Spawn egg.
+            print("egg spawned");
             var pos = gameObject.transform.position;
             Instantiate(eggPrefab, pos, quaternion.identity);
-            eggSpawned = true;
+            _time = 0;
+            _spawnTimer = Random.Range(3, 7);
 
         }
     }

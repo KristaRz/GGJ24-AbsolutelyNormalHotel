@@ -24,7 +24,7 @@ public class Shruiken : MonoBehaviour
         if (collidedWith.gameObject.tag == "Chicken")
         {
             // destroy chicken
-            collidedWith.gameObject.GetComponent<ChickenGame>().DestroySelf();
+            //collidedWith.gameObject.GetComponent<ChickenGame>().DestroySelf();
 
         }
     }
