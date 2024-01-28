@@ -729,7 +729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &307633916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3222,6 +3222,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2294872289008444235, guid: ac5fc8b975bb0054caaa35a7723be96f, type: 3}
+      propertyPath: _LeftActive.m_Action.m_Id
+      value: 8e80728b-d846-4f59-bb63-371b68d88f3c
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294872289008444235, guid: ac5fc8b975bb0054caaa35a7723be96f, type: 3}
+      propertyPath: _RightActive.m_Action.m_Id
+      value: 357cbc78-fdb9-4e0b-b779-dbe2a79808cb
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294872289008444235, guid: ac5fc8b975bb0054caaa35a7723be96f, type: 3}
+      propertyPath: _LeftActive.m_Action.m_Name
+      value: Left Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294872289008444235, guid: ac5fc8b975bb0054caaa35a7723be96f, type: 3}
+      propertyPath: _RightActive.m_Action.m_Name
+      value: Right Active
+      objectReference: {fileID: 0}
     - target: {fileID: 3613604815335520031, guid: ac5fc8b975bb0054caaa35a7723be96f, type: 3}
       propertyPath: m_Name
       value: HMDPlayerPrefab

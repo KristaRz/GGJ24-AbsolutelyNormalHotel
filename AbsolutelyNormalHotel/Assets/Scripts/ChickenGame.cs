@@ -1,5 +1,6 @@
-using UnityEngine;
+
 using UnityEngine.Events;
+using UnityEngine;
 
 public class ChickenGame : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class ChickenGame : MonoBehaviour
     public UnityEvent OnDeath;
 
 
+    Vector3 collisionPosition;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -61,12 +63,10 @@ public class ChickenGame : MonoBehaviour
     {
         if (!isGrounded)
         {
-            // When ascending
             if (rb.velocity.y > 0)
             {
                 rb.AddForce(Vector3.up * -glideForce);
             }
-            // When descending
             else if (rb.velocity.y < 0)
             {
                 EaseDescent();
@@ -76,15 +76,11 @@ public class ChickenGame : MonoBehaviour
 
     private void EaseDescent()
     {
-        // Calculate the easing factor based on the chicken's altitude or other criteria
         float easeFactor = CalculateEaseFactor();
-
-        // Apply the ease factor to gradually reduce the vertical velocity
         Vector3 newVelocity = rb.velocity;
         newVelocity.y *= easeFactor;
         rb.velocity = newVelocity;
     }
-
 
     private float CalculateEaseFactor()
     {
@@ -99,33 +95,29 @@ public class ChickenGame : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance)
             && hit.collider.CompareTag("Ground");
     }
-    Vector3 collisionPosition;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Ground")
         {
             Vector3 hitNormal = collision.contacts[0].normal;
-            hitNormal.y = 0; // Ignore vertical component of the normal
+            hitNormal.y = 0; // Flatten the normal to the horizontal plane
 
             collisionPosition = collision.contacts[0].point;
 
-
             // Calculate the new direction on the horizontal plane
-            Vector3 newDirection = Vector3.Reflect(transform.forward, hitNormal);
+            Vector3 newDirection = Vector3.Reflect(transform.forward, hitNormal).normalized;
 
-            // Reset angular velocity to prevent the chicken from tilting or rolling
-            if(rb!=null)
-            rb.angularVelocity = Vector3.zero;
+            // Set the new rotation
+            transform.rotation = Quaternion.LookRotation(newDirection);
 
-            // Calculate the new Y rotation while keeping X and Z rotations as zero
-            float newYRotation = Quaternion.LookRotation(newDirection).eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0, newYRotation, 0);
             OnCollision.Invoke();
         }
     }
 
-   public void InstantiatePrefab(GameObject prefab)
+    public void InstantiatePrefab(GameObject prefab)
     {
+
         Instantiate(prefab, collisionPosition, Quaternion.identity);
     }
 
@@ -133,10 +125,7 @@ public class ChickenGame : MonoBehaviour
     {
         OnDeath.Invoke();
         Destroy(gameObject);
-
     }
-
-    
 
     void OnDrawGizmos()
     {
