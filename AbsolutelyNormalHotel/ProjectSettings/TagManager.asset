@@ -10,6 +10,7 @@ TagManager:
   - Posessable
   - TeleportPoint
   - Ground
+  - Chicken
   layers:
   - Default
   - TransparentFX

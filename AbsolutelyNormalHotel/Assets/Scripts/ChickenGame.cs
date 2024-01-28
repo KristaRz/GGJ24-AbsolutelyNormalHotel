@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ChickenGame : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class ChickenGame : MonoBehaviour
 
     private bool isGrounded;
     private bool isFirstGrounded = true;
+
+    public UnityEvent OnCollision;
+    public UnityEvent OnDeath;
+
 
     private void Start()
     {
@@ -94,13 +99,16 @@ public class ChickenGame : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance)
             && hit.collider.CompareTag("Ground");
     }
-
+    Vector3 collisionPosition;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Ground")
         {
             Vector3 hitNormal = collision.contacts[0].normal;
             hitNormal.y = 0; // Ignore vertical component of the normal
+
+            collisionPosition = collision.contacts[0].point;
+
 
             // Calculate the new direction on the horizontal plane
             Vector3 newDirection = Vector3.Reflect(transform.forward, hitNormal);
@@ -112,9 +120,23 @@ public class ChickenGame : MonoBehaviour
             // Calculate the new Y rotation while keeping X and Z rotations as zero
             float newYRotation = Quaternion.LookRotation(newDirection).eulerAngles.y;
             transform.rotation = Quaternion.Euler(0, newYRotation, 0);
+            OnCollision.Invoke();
         }
     }
 
+   public void InstantiatePrefab(GameObject prefab)
+    {
+        Instantiate(prefab, collisionPosition, Quaternion.identity);
+    }
+
+    public void DestroySelf()
+    {
+        OnDeath.Invoke();
+        Destroy(gameObject);
+
+    }
+
+    
 
     void OnDrawGizmos()
     {

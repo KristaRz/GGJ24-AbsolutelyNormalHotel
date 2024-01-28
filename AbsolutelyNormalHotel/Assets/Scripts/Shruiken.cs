@@ -3,29 +3,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shruiken : MonoBehaviour
+public class Shuriken : MonoBehaviour
 {
-    
-    
-    void Start()
+    private Rigidbody rigidBody;
+    private bool isHeld = false;
+    private Vector3 lastPosition;
+    private Quaternion lastRotation;
+    private Vector3 velocity;
+    private Vector3 angularVelocity;
+
+    private void Awake()
     {
-        
+        rigidBody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Call this method when the shuriken starts being held
+    public void Grab()
     {
-        
+        isHeld = true;
+        rigidBody.useGravity = true;
+        lastPosition = transform.position;
+        lastRotation = transform.rotation;
     }
 
-    private void OnCollisionEnter(Collision collidedWith)
+    // Call this method when the shuriken is released
+    public void Release()
     {
-        
-        if (collidedWith.gameObject.tag == "Chicken")
+        isHeld = false;
+        rigidBody.useGravity = false;
+        rigidBody.velocity = velocity;
+
+
+        rigidBody.angularVelocity = Vector3.zero;
+        gameObject.transform.rotation = lastRotation;
+    }
+
+    private void Update()
+    {
+        if (isHeld)
         {
-            // destroy chicken
-            //collidedWith.gameObject.GetComponent<ChickenGame>().DestroySelf();
+            // Calculate velocity and angular velocity
+            velocity = (transform.position - lastPosition) / Time.deltaTime;
+            angularVelocity = (transform.rotation.eulerAngles - lastRotation.eulerAngles) / Time.deltaTime;
 
+            // Update last position and rotation for the next frame
+            lastPosition = transform.position;
+            lastRotation = transform.rotation;
         }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Chicken"))
+        {
+            // Destroy chicken
+            other.gameObject.GetComponent<ChickenGame>().DestroySelf();
+        }
+        if (!other.CompareTag("Hand") &&    other.name != "Direct Interactor" )
+        {
+
+            rigidBody.useGravity = true;
+        }
+
     }
 }
