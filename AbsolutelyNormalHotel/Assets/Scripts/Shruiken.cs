@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class Shuriken : MonoBehaviour
 {
@@ -13,19 +14,29 @@ public class Shuriken : MonoBehaviour
     private Vector3 angularVelocity;
     public Animator anim;
 
+    public float scaleDownInSec = 1.0f; // Time before starting to scale down
+    public float scaleDuration = 2.0f; // Duration of the scale down process
 
 
     public UnityEvent OnHit;
+    public UnityEvent OnReset;
     private Vector3 triggerPosition;
 
+
+    private Transform parent;
     // Variables for easing the descent
     private float maxDescentSpeed = 9.81f; // Maximum descent speed
 
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+
     private void Awake()
     {
+        parent = transform;
         rigidBody = GetComponent<Rigidbody>();
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
-
     // Called when the shuriken starts being held
     public void Grab()
     {
@@ -38,7 +49,9 @@ public class Shuriken : MonoBehaviour
     // Called when the shuriken is released
     public void Release()
     {
-        anim.SetTrigger("Roll");
+        rigidBody.isKinematic = false;
+
+        anim.SetBool("Spin", true);
 
         isHeld = false;
         isFreeFalling = true; // Start free falling when released
@@ -99,6 +112,10 @@ public class Shuriken : MonoBehaviour
     {
         Instantiate(prefab, triggerPosition, Quaternion.identity);
     }
+    public void InstantiatePrefabInGameObjectPosition   (GameObject prefab)
+    {
+        Instantiate(prefab, transform.position, Quaternion.identity);
+    }
 
     public void DestroySelf()
     {
@@ -113,21 +130,67 @@ public class Shuriken : MonoBehaviour
             OnHit.Invoke();
             other.gameObject.GetComponent<ChickenGame>().DestroySelf();
         }
-        if (!other.CompareTag("Hand") && other.name != "Direct Interactor")
+        if (!other.CompareTag("Hand") && other.name != "Direct Interactor" && !other.CompareTag("Player"))
         {
 
 
             // Instead of setting a strong gravity effect, halt the shuriken more gently
             //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0, rigidBody.velocity.z);
 
-
+            if(!other.gameObject.CompareTag("Chicken"))
             rigidBody.angularVelocity = Vector3.zero; // Optionally, stop angular velocity as well
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        anim.SetTrigger("Idle");
-        isFreeFalling = false; // Also stop free falling
+        if (collision.gameObject.name != "Platform" && !collision.gameObject.CompareTag("Shuriken") && !collision.gameObject.CompareTag("Chicken"))
+        {
+            // Deactivate the trigger collider
+            Collider triggerCollider = GetComponent<Collider>();
+            if (triggerCollider != null)
+            {
+                triggerCollider.enabled = false;
+            }
+
+            anim.SetBool("Spin", false);
+            isFreeFalling = false; // Also stop free falling
+            StartCoroutine(ScaleDownAndDestroy());
+        }
     }
+
+
+    private IEnumerator ScaleDownAndDestroy()
+    {
+        // Wait for the specified delay before starting the scale down
+        yield return new WaitForSeconds(scaleDownInSec);
+
+        float elapsed = 0;
+        Vector3 originalScale = transform.localScale; // Store the original scale
+
+        if (transform.localScale.x > 0.1f && transform.localScale.y > 0.1f && transform.localScale.z > 0.1f)
+        {
+            elapsed += Time.deltaTime;
+            float blend = Mathf.Clamp01(elapsed / scaleDuration);
+            transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, blend); // Scale down
+            yield return null;
+        }
+        StopCoroutine("ScaleDownAndDestroy");
+        ResetObject();
+    }
+    public void ResetObject()
+    {
+        OnReset.Invoke();
+        transform.localScale = new Vector3(1, 1, 1);
+        rigidBody.isKinematic = true;
+        transform.localScale = Vector3.one; // Reset scale to its initial value
+
+        transform.parent = parent;
+        transform.position = initialPosition;
+        transform.rotation = initialRotation;
+        gameObject.SetActive(true); // Reactivate the GameObject if it was deactivated
+
+   
+    }
+
 
 }

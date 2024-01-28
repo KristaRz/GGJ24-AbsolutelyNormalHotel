@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
+using Unity.Mathematics;
+using UnityEngine.Events;
 
 public class Egg : MonoBehaviour
 {
     [SerializeField] private GameObject chickenPrefab;
     [SerializeField] private GameObject eggyolkPrefab;
     
-    private float _spawnTimer = 10f;
+    public float _spawnTimer = 10f;
     private float _time;
-    
+
+    public UnityEvent onSpawn;
+
     private void Update()
     {
         
@@ -19,29 +21,46 @@ public class Egg : MonoBehaviour
         
         if ( _spawnTimer < _time)
         {
-            SpawnChicken();
+            onSpawn.Invoke();
+
 
         }
     }
-    private void OnCollisionEnter(Collision collidedWith)
+
+
+    //private void OnCollisionEnter(Collision collidedWith)
+    //{
+    //    if (collidedWith.gameObject.CompareTag("Player"))
+    //    {
+    //        SpawnEggyolk();
+    //    }
+    //}
+
+    public void InstantiatePrefab(GameObject prefab)
     {
-        if (collidedWith.gameObject.CompareTag("Player"))
+        Instantiate(prefab, transform.position, Quaternion.identity);
+    }
+
+    public void SpawnChicken(GameObject prefab)
+    {
+        // Generate a random Y rotation
+        float randomYRotation = UnityEngine.Random.Range(0f, 360f);
+        Quaternion randomRotation = Quaternion.Euler(0, randomYRotation, 0);
+
+        // Instantiate the chicken with random Y rotation
+        GameObject chicken = Instantiate(prefab, gameObject.transform.position + new Vector3(0, 0, -0.2f), randomRotation);
+
+        // Add explosion force if Rigidbody is present
+        Rigidbody chickenRigidbody = chicken.GetComponent<Rigidbody>();
+        if (chickenRigidbody != null)
         {
-            SpawnEggyolk();
+            Vector3 explosionPosition = transform.position + new Vector3(0, 0, -0.2f);
+            chickenRigidbody.AddExplosionForce(2, explosionPosition, 1, 1, ForceMode.Impulse);
         }
-    }
 
-    private void SpawnEggyolk()
-    {
-        //play sound of egg crushing maybe??
-        Instantiate(eggyolkPrefab, gameObject.transform.position, quaternion.identity);
+        // Destroy the current gameObject
         Destroy(gameObject);
     }
 
-    private void SpawnChicken()
-    {
-        Instantiate(chickenPrefab, gameObject.transform.position, quaternion.identity);
-        Destroy(gameObject);
-    }
-    
+
 }

@@ -9,29 +9,31 @@ using Random = UnityEngine.Random;
 public class EggSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject eggPrefab;
-    private float _spawnTimer;
-    private float _time;
-    
 
-    private void Awake()
-    {
-        _spawnTimer = Random.Range(7, 10);
-    }
 
-    private void Update()
+
+    public float spawnProbability = 0.5f; // 50% chance to spawn an egg
+
+    public void SpawnEgg()
     {
-        
-        _time += Time.deltaTime;
-        
-        if ( _spawnTimer < _time)
+
+        // Check if an egg should be spawned based on probability.
+        if (Random.value < spawnProbability)
         {
-            //Spawn egg.
             print("egg spawned");
             var pos = gameObject.transform.position;
-            Instantiate(eggPrefab, pos, quaternion.identity);
-            _time = 0;
-            _spawnTimer = Random.Range(3, 7);
-
+            Instantiate(eggPrefab, pos, Quaternion.identity);
         }
+        else
+        {
+            print("no egg spawned this time");
+        }
+
+    }
+
+
+    public void DestroyThisComponent()
+    {
+        Destroy(this);
     }
 }
