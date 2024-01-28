@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2506372848212045254}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7861912636866528231
 MonoBehaviour:
@@ -57,18 +57,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1750940742320366, guid: 60690ac59cf382f47933d220bb408ba9, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7861912636866528231}
-        m_TargetAssemblyTypeName: Shuriken, Assembly-CSharp
-        m_MethodName: DestroySelf
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -317,8 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 25d38e895f3435c4ab9bc571bc72c8d9, type: 3}
       propertyPath: m_Name
-      value: C__Users_kaank_OneDrive_Belgeler_GitRepo_GardenersNightmare_GGJ24-AbsolutelyNormalHotel_AbsolutelyNormalHotel_Assets_Prefabs_Shruiken
-        (2)
+      value: mesh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
