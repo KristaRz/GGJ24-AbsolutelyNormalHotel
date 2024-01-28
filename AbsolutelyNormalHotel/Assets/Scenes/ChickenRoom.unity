@@ -745,7 +745,7 @@ MonoBehaviour:
   objectToInstantiate: {fileID: 8374442060268196982, guid: 9a32178fc409db14d917920dace01510, type: 3}
   width: 3
   height: 5
-  numberOfObjects: 10
+  numberOfObjects: 20
 --- !u!4 &307633917
 Transform:
   m_ObjectHideFlags: 0
