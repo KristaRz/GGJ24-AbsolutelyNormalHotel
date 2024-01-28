@@ -13,6 +13,8 @@ public class Shuriken : MonoBehaviour
     private Vector3 angularVelocity;
     public Animator anim;
 
+
+
     public UnityEvent OnHit;
     private Vector3 triggerPosition;
 
@@ -36,9 +38,8 @@ public class Shuriken : MonoBehaviour
     // Called when the shuriken is released
     public void Release()
     {
-        anim.ResetTrigger("Idle");
-
         anim.SetTrigger("Roll");
+
         isHeld = false;
         isFreeFalling = true; // Start free falling when released
 
@@ -51,6 +52,8 @@ public class Shuriken : MonoBehaviour
 
         rigidBody.angularVelocity = angularVelocity;
         gameObject.transform.rotation = lastRotation;
+
+
 
     }
 
@@ -73,6 +76,7 @@ public class Shuriken : MonoBehaviour
 
 
             EaseDescent(); // Apply ease descent while in free fall
+                           // Rotate anim.gameObject
         }
 
 
@@ -83,6 +87,7 @@ public class Shuriken : MonoBehaviour
         Vector3 newVelocity = rigidBody.velocity;
         newVelocity.y *= easeFactor;
         rigidBody.velocity = newVelocity;
+
     }
 
     private float CalculateEaseFactor(float currentSpeed, float maxSpeed)
@@ -121,9 +126,7 @@ public class Shuriken : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        anim.ResetTrigger("Roll");
-
-        anim.SetTrigger("Idle"); // Stop the rolling animation upon collision
+        anim.SetTrigger("Idle");
         isFreeFalling = false; // Also stop free falling
     }
 
