@@ -20,9 +20,7 @@ public class EggSpawner : MonoBehaviour
         // Check if an egg should be spawned based on probability.
         if (Random.value < spawnProbability)
         {
-            print("egg spawned");
-            var pos = gameObject.transform.position;
-            Instantiate(eggPrefab, pos, Quaternion.identity);
+            Instantiate(eggPrefab, gameObject.transform.position, Quaternion.identity);
         }
         else
         {
