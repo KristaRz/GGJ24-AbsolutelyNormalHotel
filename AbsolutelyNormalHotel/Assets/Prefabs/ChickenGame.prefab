@@ -37,7 +37,7 @@ Transform:
   - {fileID: 7054165901072661520}
   - {fileID: 8112214067826521660}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3098161613314753950
 MonoBehaviour:
@@ -161,7 +161,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &3194474563782468946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,8 +299,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 75eacfb3cefaccc4bb51f508465a69be, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 75eacfb3cefaccc4bb51f508465a69be, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a86fcef3d5a7d9147adcf101b255a51f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -21,10 +21,12 @@ public class ChickenGame : MonoBehaviour
     public UnityEvent OnCollision;
     public UnityEvent OnDeath;
 
+    private Animator _anim;
 
     Vector3 collisionPosition;
     private void Start()
     {
+        _anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         ResetJumpTimer();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -46,6 +48,7 @@ public class ChickenGame : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isFirstGrounded = false;
+            _anim.SetBool("Jump", true);
             ResetJumpTimer();
         }
 
@@ -71,6 +74,13 @@ public class ChickenGame : MonoBehaviour
                 EaseDescent();
             }
         }
+        else if (isFirstGrounded)
+        {
+            isFirstGrounded = false;
+            _anim.SetBool("Jump", false);
+        }
+        else
+            isFirstGrounded = true;
     }
 
     private void EaseDescent()
