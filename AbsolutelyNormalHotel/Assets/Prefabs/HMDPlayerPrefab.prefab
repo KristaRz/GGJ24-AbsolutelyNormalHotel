@@ -1,5 +1,55 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1354677497495046401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8159523110829183299}
+  - component: {fileID: 4172589662522925645}
+  m_Layer: 2
+  m_Name: Shuriken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8159523110829183299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354677497495046401}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.937, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6246963742217563834}
+  - {fileID: 2755802680805049060}
+  - {fileID: 7157473891465826770}
+  m_Father: {fileID: 5237743962458727390}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4172589662522925645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354677497495046401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44bdbd03e71d2104e9fc430937e5e145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headset: {fileID: 4623108194663094196}
+  rotationSpeed: 2
+  followSpeed: 5
 --- !u!1 &3613604815335520031
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,6 +78,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8159523110829183299}
   - {fileID: 311001630322784434}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1897,7 +1948,7 @@ MonoBehaviour:
       m_Name: Right Active
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: bf902e14-ce24-4dd3-806b-5303ecd823e6
+      m_Id: 357cbc78-fdb9-4e0b-b779-dbe2a79808cb
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1909,7 +1960,7 @@ MonoBehaviour:
       m_Name: Left Active
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 9bf8da4a-db6e-4d9e-8740-70b7e203728d
+      m_Id: 8e80728b-d846-4f59-bb63-371b68d88f3c
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []

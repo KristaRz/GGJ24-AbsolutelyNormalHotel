@@ -3,8 +3,8 @@ using UnityEngine;
 public class RandomInstantiator : MonoBehaviour
 {
     public GameObject objectToInstantiate; // The prefab you want to instantiate
-    public int width = 10; // Width of the area
-    public int height = 10; // Height of the area
+    public float width = 10; // Width of the area
+    public float height = 10; // Height of the area
     public int numberOfObjects = 5; // Number of objects to instantiate
 
     void Start()

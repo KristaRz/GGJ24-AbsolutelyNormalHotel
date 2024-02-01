@@ -1,4 +1,3 @@
-
 using UnityEngine.Events;
 using UnityEngine;
 
@@ -133,8 +132,9 @@ public class ChickenGame : MonoBehaviour
 
     public void ActivateIfDeactive(GameObject prefab)
     {
-        if (!prefab.activeSelf)
+        if (!prefab.activeSelf )
             prefab.SetActive(true);
+
     }
 
     void OnDrawGizmos()

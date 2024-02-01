@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class Shruiken : MonoBehaviour
 {
+    // Variables for easing the descent
+    private float maxDescentSpeed = 9.81f; // Maximum descent speed
+
     private Rigidbody rigidBody;
     private bool isHeld = false;
-    private bool isFreeFalling = false; // Flag to indicate if the shuriken is in free fall
+    private bool isFreeFalling = false;
     private Vector3 lastPosition;
     private Vector3 positionBeforeRelease;
     private Quaternion lastRotation;
@@ -13,48 +17,63 @@ public class Shruiken : MonoBehaviour
     private Vector3 angularVelocity;
     public Animator anim;
 
-
-
+    public float scaleDownInSec = 1.0f;
+    public float scaleDuration = 2.0f;
     public UnityEvent OnHit;
+    public UnityEvent OnReset;
     private Vector3 triggerPosition;
 
-    // Variables for easing the descent
-    private float maxDescentSpeed = 9.81f; // Maximum descent speed
+    private Vector3 initialPosition; // Store the initial position
+    private Quaternion initialRotation; // Store the initial rotation
+
+    private GameObject parentObject; // Store the parent GameObject
 
     private void Awake()
     {
+        parentObject = transform.parent.gameObject;
+
         rigidBody = GetComponent<Rigidbody>();
+        initialPosition = transform.localPosition;
+        initialRotation = transform.localRotation;
     }
 
-    // Called when the shuriken starts being held
+    public void ResetObject()
+    {
+        // Restore the original parent
+        transform.parent = parentObject.transform;
+
+        // Restore the initial local position and rotation
+        transform.localPosition = initialPosition;
+        transform.localRotation = initialRotation;
+
+        OnReset.Invoke();
+        transform.localScale = Vector3.one;
+        rigidBody.isKinematic = true;
+        gameObject.SetActive(true);
+    }
+
+
     public void Grab()
     {
         isHeld = true;
-        isFreeFalling = false; // Stop free falling when grabbed
+        isFreeFalling = false;
         lastPosition = transform.position;
         lastRotation = transform.rotation;
     }
 
-    // Called when the shuriken is released
     public void Release()
     {
-        anim.SetTrigger("Roll");
-
+        rigidBody.isKinematic = false;
+        anim.SetBool("Spin", true);
         isHeld = false;
-        isFreeFalling = true; // Start free falling when released
+        isFreeFalling = true;
 
-        // Calculate the direction of movement at the moment of release
         Vector3 releaseDirection = (transform.position - positionBeforeRelease).normalized;
-        releaseDirection.y = 0; // Setting Y to 0 to keep horizontal direction
-
-        // Set the velocity to continue in the release direction
-        rigidBody.velocity = releaseDirection * velocity.magnitude * 2; // Adjust the multiplier as needed
-
+        releaseDirection.y = 0;
+        rigidBody.velocity = releaseDirection * velocity.magnitude * 2;
         rigidBody.angularVelocity = angularVelocity;
         gameObject.transform.rotation = lastRotation;
-
-
-
+        transform.parent = null;
     }
 
     private void Update()
@@ -63,31 +82,22 @@ public class Shruiken : MonoBehaviour
         {
             velocity = (transform.position - lastPosition) / Time.deltaTime;
             angularVelocity = rigidBody.angularVelocity;
-
-            // Update last position and rotation for the next frame
             lastPosition = transform.position;
             lastRotation = transform.rotation;
-
-            // Update positionBeforeRelease
             positionBeforeRelease = lastPosition;
         }
         else if (isFreeFalling)
         {
-
-
-            EaseDescent(); // Apply ease descent while in free fall
-                           // Rotate anim.gameObject
+            EaseDescent();
         }
-
-
     }
+
     private void EaseDescent()
     {
         float easeFactor = CalculateEaseFactor(rigidBody.velocity.y, maxDescentSpeed);
         Vector3 newVelocity = rigidBody.velocity;
         newVelocity.y *= easeFactor;
         rigidBody.velocity = newVelocity;
-
     }
 
     private float CalculateEaseFactor(float currentSpeed, float maxSpeed)
@@ -98,6 +108,10 @@ public class Shruiken : MonoBehaviour
     public void InstantiatePrefab(GameObject prefab)
     {
         Instantiate(prefab, triggerPosition, Quaternion.identity);
+    }
+    public void InstantiatePrefabObjPos(GameObject prefab)
+    {
+        Instantiate(prefab, transform.position, Quaternion.identity);
     }
 
     public void DestroySelf()
@@ -113,21 +127,43 @@ public class Shruiken : MonoBehaviour
             OnHit.Invoke();
             other.gameObject.GetComponent<ChickenGame>().DestroySelf();
         }
-        if (!other.CompareTag("Hand") && other.name != "Direct Interactor")
+        if (!other.CompareTag("Hand") && other.name != "Direct Interactor" && !other.CompareTag("Player"))
         {
-
-
-            // Instead of setting a strong gravity effect, halt the shuriken more gently
-            //rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0, rigidBody.velocity.z);
-
-
-            rigidBody.angularVelocity = Vector3.zero; // Optionally, stop angular velocity as well
+            rigidBody.angularVelocity = Vector3.zero;
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
-        anim.SetTrigger("Idle");
-        isFreeFalling = false; // Also stop free falling
+        if (collision.gameObject.name != "Platform" && !collision.gameObject.CompareTag("Shuriken") && !collision.gameObject.CompareTag("Chicken"))
+        {
+            Collider triggerCollider = GetComponent<Collider>();
+            if (triggerCollider != null)
+            {
+                triggerCollider.enabled = false;
+            }
+
+            anim.SetBool("Spin", false);
+            isFreeFalling = false;
+            StartCoroutine(ScaleDownAndDestroy());
+        }
     }
 
+    private IEnumerator ScaleDownAndDestroy()
+    {
+        yield return new WaitForSeconds(scaleDownInSec);
+        float elapsed = 0;
+        Vector3 originalScale = transform.localScale;
+
+        if (transform.localScale.x > 0.1f && transform.localScale.y > 0.1f && transform.localScale.z > 0.1f)
+        {
+            elapsed += Time.deltaTime;
+            float blend = Mathf.Clamp01(elapsed / scaleDuration);
+            transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, blend);
+            yield return null;
+        }
+
+        StopCoroutine("ScaleDownAndDestroy");
+        ResetObject();
+    }
 }

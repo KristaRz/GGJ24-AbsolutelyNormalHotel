@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3409222388278104899}
+  scaleDownInSec: 3
+  scaleDuration: 0.2
   OnHit:
     m_PersistentCalls:
       m_Calls:
@@ -89,6 +91,21 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1750940742320366, guid: 60690ac59cf382f47933d220bb408ba9, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnReset:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7861912636866528231}
+        m_TargetAssemblyTypeName: Shuriken, Assembly-CSharp
+        m_MethodName: InstantiatePrefabObjPos
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1844191813266838, guid: 38f58c02e0f7350449a97cd0e848380f, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -118,7 +135,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -277,7 +294,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_ThrowVelocityScale: 3
-  m_ThrowAngularVelocityScale: 3
+  m_ThrowAngularVelocityScale: 5
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
