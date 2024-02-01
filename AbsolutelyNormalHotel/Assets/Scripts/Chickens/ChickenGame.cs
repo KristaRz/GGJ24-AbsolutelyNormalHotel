@@ -126,8 +126,10 @@ public class ChickenGame : MonoBehaviour
     {
         LevelHandler.Instance.CountChickenKill();
         OnDeath.Invoke();
-        Destroy(gameObject);
+        Invoke("DestroyChicken", 0.1f);
     }
+
+    private void DestroyChicken() => Destroy(gameObject);
 
     public void ActivateIfDeactive(GameObject prefab)
     {
