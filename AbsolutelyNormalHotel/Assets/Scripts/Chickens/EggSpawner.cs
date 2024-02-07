@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
+
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,17 +13,11 @@ public class EggSpawner : MonoBehaviour
 
     public void SpawnEgg()
     {
-
         // Check if an egg should be spawned based on probability.
         if (Random.value < spawnProbability)
         {
             Instantiate(eggPrefab, gameObject.transform.position, Quaternion.identity);
         }
-        else
-        {
-            print("no egg spawned this time");
-        }
-
     }
 
 

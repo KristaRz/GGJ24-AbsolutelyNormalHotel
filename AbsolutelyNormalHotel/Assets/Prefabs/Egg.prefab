@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4849551660832496355}
   - component: {fileID: 3393251732754624637}
   - component: {fileID: 1237326742657222846}
+  - component: {fileID: 7091929167388454888}
   m_Layer: 0
   m_Name: Egg
   m_TagString: Untagged
@@ -141,27 +142,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!135 &2407054655276489721
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5785845035286408208}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.0011046547
-  m_Center: {x: -2.910383e-11, y: 8.731148e-11, z: 0.0011231757}
 --- !u!54 &3393251732754624637
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -209,6 +189,27 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.0011046552
+  m_Center: {x: -2.910383e-11, y: 8.731151e-11, z: 0.0011231762}
+--- !u!135 &7091929167388454888
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785845035286408208}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.0023516088
   m_Center: {x: -2.910383e-11, y: 8.731151e-11, z: 0.0011231762}
 --- !u!1001 &8498752589517318605
 PrefabInstance:

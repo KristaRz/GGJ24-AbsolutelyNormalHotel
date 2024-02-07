@@ -1,40 +1,64 @@
-using System;
-using System.Collections;
+
 using UnityEngine;
-using Unity.Mathematics;
 using UnityEngine.Events;
 
 public class Egg : MonoBehaviour
 {
     [SerializeField] private GameObject chickenPrefab;
     [SerializeField] private GameObject eggyolkPrefab;
-    
-    public float _spawnTimer = 10f;
+
+    public float _spawnTimer = 3f;
     private float _time;
 
     public UnityEvent onSpawn;
 
+    private bool _countTime = true;
+
     private void Update()
     {
-        
+        if (!_countTime) return;
+
         _time += Time.deltaTime;
-        
-        if ( _spawnTimer < _time)
+
+        if (_spawnTimer < _time)
         {
             onSpawn.Invoke();
-
-
         }
     }
 
+    /*
+    private void OnTriggerEnter(Collider collidedWith)
+    {
+        if (collidedWith.gameObject.CompareTag("Player"))
+        {
+            SpawnEggyolk();
+            Debug.Log("Collided with player");
+            _countTime = false;
+        }
+    }
+    */
 
-    //private void OnCollisionEnter(Collision collidedWith)
-    //{
-    //    if (collidedWith.gameObject.CompareTag("Player"))
-    //    {
-    //        SpawnEggyolk();
-    //    }
-    //}
+    private void OnCollisionEnter(Collision collidedWith)
+    {
+        if (collidedWith.gameObject.CompareTag("Player"))
+        {
+            SpawnEggyolk();
+            Debug.Log("Collided with player");
+            _countTime = false;
+        }
+    }
+
+    private void SpawnEggyolk()
+    {
+        // Instantiate the eggyolk and set this as the parent
+        Instantiate(eggyolkPrefab, transform.position, Quaternion.identity, transform);
+        GetComponent<MeshRenderer>().enabled = false;
+        Debug.Log("Spawning eggyolk");
+        // Destroy the current gameObject
+        Invoke("DestroyThis", 1f); 
+    }
+
+    private void DestroyThis() { Destroy(gameObject); Debug.Log("Destroying egg"); }
 
     public void InstantiatePrefab(GameObject prefab)
     {
