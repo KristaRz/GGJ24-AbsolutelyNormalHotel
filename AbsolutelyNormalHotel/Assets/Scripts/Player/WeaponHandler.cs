@@ -30,8 +30,14 @@ public class WeaponHandler : MonoBehaviour
         if (_currentWeaponType == GameManager.WeaponType.None)
             return;
         if (_currentWeaponType == GameManager.WeaponType.Shuriken)
+        {
+            Katana.SetActive(false);
             Shuriken.SetActive(true);
+        }
         else
+        {
+            Shuriken.SetActive(false);
             Katana.SetActive(true);
+        }
     }
 }

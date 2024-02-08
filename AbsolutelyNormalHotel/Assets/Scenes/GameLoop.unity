@@ -12493,8 +12493,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e624ff456c20c4b4daaf14e106dc4fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voiceLines: []
+  voiceLines:
+  - {fileID: 8300000, guid: 778e162394aa5454d98bf5248d145e1b, type: 3}
   delayBetween: 0
+  Eyes:
+  - {fileID: 1615175469}
+  - {fileID: 1153294859}
 --- !u!114 &575596807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13540,13 +13544,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678246646}
-  m_LocalRotation: {x: 0.7071068, y: -0.7071067, z: 0.000000030908616, w: -0.000000030908623}
-  m_LocalPosition: {x: -0, y: 0.025358064, z: 0}
-  m_LocalScale: {x: -1.0000001, y: -1.0000001, z: -1.0000001}
+  m_LocalRotation: {x: 0.7071069, y: -0.70710677, z: 0.00000006211397, w: -0.000000064326585}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: -1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1642688337}
-  m_Father: {fileID: 1854588940}
+  m_Father: {fileID: 1153294859}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &678587660
@@ -19022,6 +19026,18 @@ MonoBehaviour:
           m_StringArgument: Shuriken
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4396488834919046955}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Shuriken
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 7718138420628316367}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -19370,12 +19386,44 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152629794}
-  m_LocalRotation: {x: -0.7071067, y: 0.7071068, z: -0.000000030908623, w: 0.000000030908616}
-  m_LocalPosition: {x: -0, y: -0.025358064, z: 0}
-  m_LocalScale: {x: -1.0000001, y: -1.0000001, z: -1.0000001}
+  m_LocalRotation: {x: -0.7071067, y: 0.7071068, z: -0.00000005594173, w: 0.000000028351984}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: -1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2014591861}
+  m_Father: {fileID: 1615175469}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1153294858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1153294859}
+  m_Layer: 0
+  m_Name: LeftEye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1153294859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153294858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.02535806, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 678246647}
   m_Father: {fileID: 1854588940}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21550,7 +21598,7 @@ GameObject:
   - component: {fileID: 1363889156}
   - component: {fileID: 1363889155}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: PickupCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21598,6 +21646,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: Katana
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7718138420628316367}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Katana
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 4396488834919046955}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -24511,6 +24571,38 @@ SkinnedMeshRenderer:
     m_Center: {x: -2.3283064e-10, y: 0.0014375811, z: 0.0027775657}
     m_Extent: {x: 0.00413814, y: 0.007881041, z: 0.004931038}
   m_DirtyAABB: 0
+--- !u!1 &1615175468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615175469}
+  m_Layer: 0
+  m_Name: RightEye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1615175469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615175468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.02535806, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1152629795}
+  m_Father: {fileID: 1854588940}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1621553921
 GameObject:
   m_ObjectHideFlags: 0
@@ -27355,8 +27447,8 @@ Transform:
   m_LocalScale: {x: -0.01636966, y: -0.01636966, z: -0.017781915}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1152629795}
-  - {fileID: 678246647}
+  - {fileID: 1615175469}
+  - {fileID: 1153294859}
   - {fileID: 365247448}
   - {fileID: 1021908514}
   - {fileID: 1621553922}
