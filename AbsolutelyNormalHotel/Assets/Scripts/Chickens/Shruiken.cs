@@ -89,6 +89,13 @@ public class Shruiken : MonoBehaviour
         else if (isFreeFalling)
         {
             EaseDescent();
+            if(transform.position.y < -10)
+            {
+                anim.SetBool("Spin", false);
+                isFreeFalling = false;
+                ResetObject();
+            }
+
         }
     }
 
@@ -127,26 +134,29 @@ public class Shruiken : MonoBehaviour
             OnHit.Invoke();
             other.gameObject.GetComponent<ChickenGame>().DestroySelf();
         }
-        if (!other.CompareTag("Hand") && other.name != "Direct Interactor" && !other.CompareTag("Player"))
+        else if (other.CompareTag("Ground"))
         {
-            rigidBody.angularVelocity = Vector3.zero;
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name != "Platform" && !collision.gameObject.CompareTag("Shuriken") && !collision.gameObject.CompareTag("Chicken"))
-        {
+            /*
             Collider triggerCollider = GetComponent<Collider>();
             if (triggerCollider != null)
             {
                 triggerCollider.enabled = false;
             }
-
+            */
             anim.SetBool("Spin", false);
             isFreeFalling = false;
             StartCoroutine(ScaleDownAndDestroy());
         }
+        else //if (!other.CompareTag("Hand") && other.name != "Direct Interactor" && !other.CompareTag("Player"))
+        {
+            rigidBody.angularVelocity = Vector3.zero;
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+       
     }
 
     private IEnumerator ScaleDownAndDestroy()
@@ -162,8 +172,11 @@ public class Shruiken : MonoBehaviour
             transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, blend);
             yield return null;
         }
-
-        StopCoroutine("ScaleDownAndDestroy");
         ResetObject();
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

@@ -6,6 +6,7 @@ public class Egg : MonoBehaviour
 {
     [SerializeField] private GameObject chickenPrefab;
     [SerializeField] private GameObject eggyolkPrefab;
+    public Collider EggCollider;
 
     public float _spawnTimer = 3f;
     private float _time;
@@ -25,8 +26,7 @@ public class Egg : MonoBehaviour
             onSpawn.Invoke();
         }
     }
-
-    /*
+   
     private void OnTriggerEnter(Collider collidedWith)
     {
         if (collidedWith.gameObject.CompareTag("Player"))
@@ -36,7 +36,6 @@ public class Egg : MonoBehaviour
             _countTime = false;
         }
     }
-    */
 
     private void OnCollisionEnter(Collision collidedWith)
     {
@@ -45,6 +44,11 @@ public class Egg : MonoBehaviour
             SpawnEggyolk();
             Debug.Log("Collided with player");
             _countTime = false;
+        }
+        if (collidedWith.gameObject.CompareTag("Ground"))
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+            EggCollider.enabled = false;
         }
     }
 

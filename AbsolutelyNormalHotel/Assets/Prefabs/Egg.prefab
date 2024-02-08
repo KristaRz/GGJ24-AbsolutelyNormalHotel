@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chickenPrefab: {fileID: 8374442060268196982, guid: 9a32178fc409db14d917920dace01510, type: 3}
   eggyolkPrefab: {fileID: 8935190855468557222, guid: ac4288fa22e224fc4a3b5907dc755cbd, type: 3}
+  EggCollider: {fileID: 1237326742657222846}
   _spawnTimer: 3
   onSpawn:
     m_PersistentCalls:

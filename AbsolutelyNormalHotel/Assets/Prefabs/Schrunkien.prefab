@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3409222388278104899}
-  scaleDownInSec: 3
-  scaleDuration: 0.2
+  scaleDownInSec: 1
+  scaleDuration: 0.1
   OnHit:
     m_PersistentCalls:
       m_Calls:
@@ -371,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 25d38e895f3435c4ab9bc571bc72c8d9, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

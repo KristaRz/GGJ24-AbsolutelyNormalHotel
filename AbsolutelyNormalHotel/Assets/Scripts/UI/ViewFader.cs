@@ -69,9 +69,9 @@ public class ViewFader : MonoBehaviour
 
         if (blinkScreen)
         {
+            blinkScreen = false;
             yield return new WaitForSeconds(endDelay);
 
-            blinkScreen = false;
             FadeScreenState(true);
         }
     }

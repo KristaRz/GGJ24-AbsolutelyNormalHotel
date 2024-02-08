@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
         ViewFader viewFader = FindObjectOfType<ViewFader>();
         viewFader.OnScreenOff.AddListener(CalculateScore);
         viewFader.BlinkScreen();
+        ElevatorManager.Instance.SetDoorDelay(0f);
+        ElevatorManager.Instance.SetDoorState(true);
         CalculateScore();
     }
 
